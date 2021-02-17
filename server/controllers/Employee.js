@@ -1,21 +1,21 @@
-const EmployeeCtrl = require('../models/Company')
+const Employee = require('../models/Employee')
 
-const getCompany = async (req,res) => {
+const getEmployee = async (req,res) => {
    try {
-      const company = await EmployeeCtrl.findByPk(req.params.id)
+      const employee = await Employee.findByPk(req.params.id)
 
-      if(!company) {
+      if(!employee) {
          return res.status(404).json({
             success: false,
-            message : 'Company not found'
+            message : 'Employee not found'
          })
       }
 
-      console.log(JSON.stringify(company,null,3))
+      console.log(JSON.stringify(employee,null,3))
 
       return res.status(200).json({
          success : true,
-         company : company
+         employee : employee
       })
 
    } catch(error) {
@@ -26,9 +26,9 @@ const getCompany = async (req,res) => {
    }
 }
 
-const getCompanies = async (req,res) => {
+const getEmployees = async (req,res) => {
    try {
-      const companies = await EmployeeCtrl.findAll()
+      const companies = await Employee.findAll()
 
       if(!companies) {
          return res.status(404).json({
@@ -52,29 +52,31 @@ const getCompanies = async (req,res) => {
    }
 }
 
-const createCompany = async (req,res) => {
+const createEmployee = async (req,res) => {
    if(!req.body) {
       return res.status(400).json({
          success : false,
-         message: 'Must provide a company'
+         message: 'Must provide a employee'
       })
    }
 
    try {
-      const company = await EmployeeCtrl.create({
-         name : req.body.name
+      const employee = await Employee.create({
+         name : req.body.name,
+         age : req.body.age,
+         company_id: req.body.company_id
       })
 
-      if(!company) {
+      if(!employee) {
          return res.status(400).json({
             success : false,
-            message: 'Company not created'
+            message: 'Employee not created'
          })
       }
 
       return res.status(201).json({
          success: true,
-         message: 'Company inserted'
+         message: 'Employee inserted'
       })
 
    } catch(err) {
@@ -85,40 +87,42 @@ const createCompany = async (req,res) => {
    }
 }
 
-const updateCompany = async(req,res) => {
+const updateEmployee = async(req,res) => {
    if(!req.body) {
       return res.status(400).json({
          success : false,
-         message: 'Must provide a company'
+         message: 'Must provide a employee'
       })
    }
    try {
-      const toUpdate = await EmployeeCtrl.findByPk(req.params.id)
+      const toUpdate = await Employee.findByPk(req.params.id)
       if(!toUpdate) {
          return res.status(404).json({
             success : false,
-            message: 'Company not found'
+            message: 'Employee not found'
          })
       }
 
-      const company = await EmployeeCtrl.update({
-         name : req.body.name
+      const employee = await Employee.update({
+         name : req.body.name,
+         age : req.body.age,
+         company_id: req.body.company_id
       },{
          where : {
             id : toUpdate.id
          }
       })
 
-      if(!company) {
+      if(!employee) {
          return res.status(400).json({
             success : false,
-            message: 'Company not updated'
+            message: 'Employee not updated'
          })
       }
 
       return res.status(201).json({
          success: true,
-         message: 'Company updated'
+         message: 'Employee updated'
       })
 
    } catch(err) {
@@ -130,33 +134,33 @@ const updateCompany = async(req,res) => {
 
 }
 
-const deleteCompany = async(req,res) => {
+const deleteEmployee = async(req,res) => {
 
    try {
-      const toDelete = await EmployeeCtrl.findByPk(req.params.id)
+      const toDelete = await Employee.findByPk(req.params.id)
       if(!toDelete) {
          return res.status(404).json({
             success : false,
-            message: 'Company not found'
+            message: 'Employee not found'
          })
       }
 
-      const company = await EmployeeCtrl.destroy({
+      const employee = await Employee.destroy({
          where : {
             id : toDelete.id
          }
       })
 
-      if(!company) {
+      if(!employee) {
          return res.status(400).json({
             success : false,
-            message: 'Company not deleted'
+            message: 'Employee not deleted'
          })
       }
 
       return res.status(201).json({
          success: true,
-         message: 'Company deleted'
+         message: 'Employee deleted'
       })
 
    } catch(err) {
@@ -168,9 +172,10 @@ const deleteCompany = async(req,res) => {
 }
 
 module.exports = {
-   getCompany,
-   getCompanies,
-   createCompany,
-   updateCompany,
-   deleteCompany
+   getEmployee,
+   getEmployees,
+   createEmployee,
+   updateEmployee,
+   deleteEmployee
 }
+
