@@ -52,7 +52,125 @@ const getCompanies = async (req,res) => {
    }
 }
 
+const createCompany = async (req,res) => {
+   if(!req.body) {
+      return res.status(400).json({
+         success : false,
+         message: 'Must provide a company'
+      })
+   }
+
+   try {
+      const company = await Company.create({
+         name : req.body.name
+      })
+
+      if(!company) {
+         return res.status(400).json({
+            success : false,
+            message: 'Company not created'
+         })
+      }
+
+      return res.status(201).json({
+         success: true,
+         message: 'Company inserted'
+      })
+
+   } catch(err) {
+      return res.status(400).json({
+         success : false,
+         message: err.message
+      })
+   }
+}
+
+const updateCompany = async(req,res) => {
+   if(!req.body) {
+      return res.status(400).json({
+         success : false,
+         message: 'Must provide a company'
+      })
+   }
+   try {
+      const toUpdate = await Company.findByPk(req.params.id)
+      if(!toUpdate) {
+         return res.status(404).json({
+            success : false,
+            message: 'Company not found'
+         })
+      }
+
+      const company = await Company.update({
+         name : req.body.name
+      },{
+         where : {
+            id : toUpdate.id
+         }
+      })
+
+      if(!company) {
+         return res.status(400).json({
+            success : false,
+            message: 'Company not updated'
+         })
+      }
+
+      return res.status(201).json({
+         success: true,
+         message: 'Company updated'
+      })
+
+   } catch(err) {
+      return res.status(400).json({
+         success : false,
+         message: err.message
+      })
+   }
+
+}
+
+const deleteCompany = async(req,res) => {
+
+   try {
+      const toUpdate = await Company.findByPk(req.params.id)
+      if(!toUpdate) {
+         return res.status(404).json({
+            success : false,
+            message: 'Company not found'
+         })
+      }
+
+      const company = await Company.destroy({
+         where : {
+            id : toUpdate.id
+         }
+      })
+
+      if(!company) {
+         return res.status(400).json({
+            success : false,
+            message: 'Company not deleted'
+         })
+      }
+
+      return res.status(201).json({
+         success: true,
+         message: 'Company deleted'
+      })
+
+   } catch(err) {
+      return res.status(400).json({
+         success : false,
+         message: err.message
+      })
+   }
+}
+
 module.exports = {
    getCompany,
-   getCompanies
+   getCompanies,
+   createCompany,
+   updateCompany,
+   deleteCompany
 }
