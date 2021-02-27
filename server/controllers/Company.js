@@ -6,8 +6,7 @@ const getCompany = async (req,res) => {
 
       if(!company) {
          return res.status(404).json({
-            success: false,
-            message : 'Company not found'
+            success: false, message : 'Company not found'
          })
       }
 
@@ -54,7 +53,7 @@ const getCompanies = async (req,res) => {
 
 const createCompany = async (req,res) => {
    if(!req.body) {
-      return res.status(400).json({
+      return res.status(204).json({
          success : false,
          message: 'Must provide a company'
       })
@@ -87,7 +86,7 @@ const createCompany = async (req,res) => {
 
 const updateCompany = async(req,res) => {
    if(!req.body) {
-      return res.status(400).json({
+      return res.status(204).json({
          success : false,
          message: 'Must provide a company'
       })
