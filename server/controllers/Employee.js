@@ -19,35 +19,29 @@ const getEmployee = async (req,res) => {
       })
 
    } catch(error) {
-      return res.status(400).json({
-         success : false,
-         message: err.message
-      })
+      return res.status(400).json(employee)
    }
 }
 
 const getEmployees = async (req,res) => {
    try {
-      const companies = await Employee.findAll()
+      const employees = await Employee.findAll()
 
-      if(!companies) {
+      if(!employees) {
          return res.status(404).json({
             success: false,
             message : 'No companies provided'
          })
-      }
+      employees}
 
-      console.log(JSON.stringify(companies,null,3))
+      console.log(JSON.stringify(employees,null,3))
 
-      return res.status(200).json({
-         success : true,
-         companies : companies
-      })
+      return res.status(200).json(employees)
 
    } catch(error) {
       return res.status(400).json({
          success : false,
-         message: err.message
+         message: error.message
       })
    }
 }

@@ -21,9 +21,8 @@ export class CompanyComponent implements OnInit {
 
    getCompanies() : void {
       this.companyService.getCompanies()
-         .subscribe(obj => {
-            const companies = obj["companies"]
-            this.companies = companies;
+         .subscribe(companies => {
+           this.companies = companies 
          })
    }
 }

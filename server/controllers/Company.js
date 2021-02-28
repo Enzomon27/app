@@ -12,10 +12,7 @@ const getCompany = async (req,res) => {
 
       console.log(JSON.stringify(company,null,3))
 
-      return res.status(200).json({
-         success : true,
-         company : company
-      })
+      return res.status(200).json(company)
 
    } catch(error) {
       return res.status(400).json({
@@ -38,10 +35,7 @@ const getCompanies = async (req,res) => {
 
       console.log(JSON.stringify(companies,null,3))
 
-      return res.status(200).json({
-         success : true,
-         companies : companies
-      })
+      return res.status(200).json(companies)
 
    } catch(error) {
       return res.status(400).json({

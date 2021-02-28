@@ -9,12 +9,12 @@
       "test": ""
    },
    "dependencies": {
-      "cors": "^2.8.5",
+      "cors": "2.8.5",
       "express": "4.17.1",
       "mariadb": "2.5.2",
       "sequelize": "6.5.0"
    },
    "devDependencies": {
-      "nodemon": "^2.0.7"
+      "nodemon": "2.0.7"
    }
 }

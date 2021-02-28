@@ -11,7 +11,6 @@
    cursor: pointer;
    background-color: rgb(0,0,0,0.1);
    margin-bottom:0.5em;
-   color: rgb(0,0,0,0.7);
    line-height: 1.6em;
    min-width: 18px;
    text-align: left;
@@ -30,4 +29,10 @@
    background: #000;
    color: #fff;
    border-radius: 4px 0px 0px 4px;
+}
+
+.companies a {
+   text-decoration: none;
+   display: block;
+   color: rgb(0,0,0,0.7);
 }
