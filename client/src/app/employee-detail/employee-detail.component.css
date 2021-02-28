@@ -1,0 +1,28 @@
+* {
+   color: rgb(0,0,0,0.7);
+}
+
+h2 {
+   color: rgb(120,0,0,0.9);
+}
+
+label {
+   color: rgb(80,0,0,0.9);
+}
+
+input {
+   color : rgb(0,0,0,0.8);
+   font-size: 120%;
+   padding: 0.4em;
+   margin-left: 0.4em;
+}
+
+button {
+   color: rgb(0,0,0);
+   background-color: rgb(20,20,20,0.1);
+   border: none;
+   padding: 0.5em 1.5em;
+   cursor: pointer;
+   font-size: 100%;
+   border-radius: 4px;
+}

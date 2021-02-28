@@ -1,0 +1,39 @@
+* {
+   text-decoration: none;
+}
+
+nav {
+   background-color: #000;
+   border-radius: 10px;
+}
+
+ul {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+   position: relative;
+   list-style-type: none;
+   margin: 1.5em 3.5em 1.5em 0;
+   min-height: 50px;
+}
+
+li {
+   margin-right: 1.5em;
+   padding: 10px;
+   display: flex;
+   align-items: center;
+}
+
+a {
+   text-decoration: none;
+   text-align: center;
+   color: rgb(255,255,255);
+   display: block;
+   transition: 1s;
+}
+
+a:hover {
+   transform: scale(1.1,1.1);
+   color: #fff;
+}

@@ -15,7 +15,9 @@ import { environment } from '../../environments/environment';
 export class CompanyService {
    private companyUrl = `${environment.serverUrl}/companies`;
 
-   constructor(private http: HttpClient) { }
+   constructor(
+      private http: HttpClient
+   ) { }
 
    getCompanies() : Observable<Company[]> {
       return this.http.get<Company[]>(this.companyUrl)
@@ -31,6 +33,7 @@ export class CompanyService {
             catchError(this.handleError<Company>('getCompanies'))
          )
    }
+
 
    private handleError<T>(operation = 'operation',result?: T) {
       return (error: any): Observable<T> => {

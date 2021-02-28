@@ -5,5 +5,15 @@
       <label for="company-name">Company name:</label>
       <input name="company-name" [(ngModel)]="company.name" placeholder="Company Name" />
    </div>
+   <h3>Employees</h3>
+   <div>
+      <ul>
+         <li *ngFor="let employee of employees; index as idx">
+            <a routerLink="/employees/detail/{{employee.id}}">
+               <span class="badge">{{idx+1}}</span>{{employee.name}}
+            </a>
+         </li>
+      </ul>
+   <div>
    <button (click)="goBack()">back</button>
 </div>

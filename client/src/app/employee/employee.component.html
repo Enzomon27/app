@@ -1,0 +1,7 @@
+<ul class="employees">
+   <li *ngFor="let employee of employees; index as idx">
+      <a routerLink="/employees/detail/{{employee.id}}">
+         <span class="badge">{{idx+1}}</span>{{employee.name}}
+      </a>
+   </li>
+</ul>
