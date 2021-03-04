@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Employee } from './employee'; import { Company } from '../company/company';
+import { Employee } from './employee';
 
 import { environment } from '../../environments/environment';
 
@@ -16,7 +16,9 @@ export class EmployeeService {
 
    private employeeUrl = `${environment.serverUrl}/employees`;
 
-   constructor(private http : HttpClient) { }
+   constructor(
+      private http : HttpClient,
+   ) { }
 
    getEmployees() : Observable<Employee[]> {
       return this.http.get<Employee[]>(this.employeeUrl)

@@ -7,8 +7,7 @@ import { Employee } from '../employee/employee';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Observable, of, concat } from 'rxjs';
-import { catchError, map, filter, concatMap, tap } from 'rxjs/operators';
+import { catchError, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company-detail',
@@ -28,31 +27,34 @@ export class CompanyDetailComponent implements OnInit {
 
    ngOnInit(): void {
       this.getCompany()
-      this.getEmployeesAndFilter()
+      this.getEmployees()
    }
 
    getCompany() : void {
       const id = +this.route.snapshot.paramMap.get('id')
       this.companyService.getCompany(id)
-         .subscribe(company => {
-            this.company = company
-         })
+         .subscribe(
+            company => {
+               this.company = company
+               console.log(company)
+            },
+            err => { console.error(err.message) },
+            () =>  { console.log('ok') }
+         )
    }
 
-   getEmployeesAndFilter() : void {
-      this.employeeService.getEmployees()
-         .subscribe(async employees => {
-            const filters = await Promise.all(employees.filter(emp => {
-               if(emp["company_id"] === this.company.id) {
-                  return emp
-               }
-            }))
+   getEmployees() : void {
+      const id = +this.route.snapshot.paramMap.get('id')
+      const obs = this.employeeService.getEmployees()
+         .pipe(
+            map(employees => employees.filter(employee => employee["company_id"] === id ))
+         )
 
-            this.employees = filters
-         })
+      obs.subscribe(employees => this.employees = employees)
    }
 
    goBack() : void {
       this.location.back();
    }
+
 }
